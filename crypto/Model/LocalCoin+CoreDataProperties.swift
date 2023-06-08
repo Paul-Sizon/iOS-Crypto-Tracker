@@ -16,8 +16,10 @@ extension LocalCoin {
         return NSFetchRequest<LocalCoin>(entityName: "LocalCoin")
     }
 
+    @NSManaged public var id: UUID?
     @NSManaged public var amount: Double
     @NSManaged public var name: String?
+    @NSManaged public var initialPrice: Double
 
 }
 

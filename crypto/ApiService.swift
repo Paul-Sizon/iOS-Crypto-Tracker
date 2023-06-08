@@ -9,7 +9,7 @@ import Foundation
 
 class ApiService {
     func getCryptoData(completion: @escaping (CryptoResponse) -> ()) {
-        guard let url = URL(string: "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin,cardano,dogecoin,matic-network&vs_currencies=usd") else {
+        guard let url = URL(string: "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin,cardano,dogecoin,matic-network,tether&vs_currencies=usd") else {
             print("Invalid URL")
             return
         }

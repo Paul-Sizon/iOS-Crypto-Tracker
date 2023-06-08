@@ -13,13 +13,14 @@ struct CardView: View {
     var price: Double
     
     var body: some View {
-        VStack(alignment: .leading) {
+        HStack() {
             Text(name)
                 .font(.headline)
                 .fontWeight(.heavy)
                 .foregroundColor(.white)
-            Text("Price: \(price)")
-                .font(.subheadline)
+            Spacer()
+            Text("\(price) $")
+                .font(.headline)
                 .foregroundColor(.white)
         }
         .padding() // Padding around the text
@@ -31,5 +32,11 @@ struct CardView: View {
         .shadow(color: .gray, radius: 10, x: 0, y: 10) // Adds shadow around the card
         .padding(.horizontal) // Horizontal padding around the card
         .padding(.vertical, 5)
+    }
+}
+
+struct CardView_Previews: PreviewProvider {
+    static var previews: some View {
+        CardView(name: "BTC",price: 27.3464560)
     }
 }

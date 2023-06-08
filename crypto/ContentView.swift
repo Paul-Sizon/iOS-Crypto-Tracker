@@ -46,24 +46,39 @@ struct ListingsView: View {
 
 
 struct WalletView: View {
+    @FetchRequest(
+        entity: LocalCoin.entity(),
+        sortDescriptors: [NSSortDescriptor(keyPath: \LocalCoin.name, ascending: true)]
+    )
+    private var coins: FetchedResults<LocalCoin>
+
+    
     @ObservedObject var viewModel: CryptoViewModel
 
     var body: some View {
         NavigationView {
-            VStack {
-                NavigationLink(destination: AddCoinView()) {
-                    Text("Add a new coin")
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
+            ScrollView {
+                VStack(alignment: .center, spacing: 20) {
+                    ForEach(coins, id: \.self) { coin in
+                        if let coinName = coin.name,
+                           let coinPrice = viewModel.cryptos[coinName]?.usd {
+                            LocalCoinView(name: coinName, amount: coin.amount, priceInUSD: coinPrice, initalPriceInUsd: coin.initialPrice)
+                        }
+                    }
+                    
+                    NavigationLink(destination: AddCoinView(viewModel: viewModel)) {
+                        Text("Add a new coin")
+                            .padding()
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(8)
+                    }
                 }
-                Spacer()
+                .padding()
+                .navigationBarTitle("My Wallet", displayMode: .inline)
             }
-            .padding()
-            .navigationBarTitle("My Wallet", displayMode: .inline)
         }
-    }
+        }
 }
 
 struct AddCoinView: View {
@@ -74,8 +89,9 @@ struct AddCoinView: View {
     @State var amount: String = ""
     @State private var showingAlert = false
 
+    @ObservedObject var viewModel: CryptoViewModel
 
-    let coins = ["BTC", "BNB", "Polygon", "ADA", "DOGE", "ETH", "USD"]
+    let coins = ["BTC", "BNB", "Polygon", "ADA", "DOGE", "ETH", "USDT"]
 
     var body: some View {
         NavigationView {
@@ -109,6 +125,7 @@ struct AddCoinView: View {
         let newCoin = LocalCoin(context: viewContext)
         newCoin.name = selectedCoin
         newCoin.amount = amountAsDouble
+        newCoin.initialPrice = viewModel.cryptos[selectedCoin]?.usd ?? 0
         do {
             try viewContext.save()
         } catch {

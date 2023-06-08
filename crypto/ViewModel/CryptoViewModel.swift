@@ -13,7 +13,11 @@ class CryptoViewModel: ObservableObject {
     let coinNameMapping: [String: String] = [
         "bitcoin": "BTC",
         "binancecoin": "BNB",
-        "matic-network": "Polygon"
+        "matic-network": "Polygon",
+        "cardano": "ADA",
+        "dogecoin": "DOGE",
+        "ethereum": "ETH",
+        "tether": "USDT"
     ]
 
     func loadData() {
