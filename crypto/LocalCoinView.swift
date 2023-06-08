@@ -48,14 +48,16 @@ struct LocalCoinView: View {
     }
     
     private func gradientColors() -> [Color] {
-            if let initialPrice = initalPriceInUsd,
-               initialPrice != 0,
-               initialPrice != priceInUSD {
-                return priceInUSD > initialPrice ? [.black, .green] : [.black, .red]
-            } else {
-                return [.black, .yellow]
-            }
+        if name.lowercased() == "usdt" {
+            return [.black, .yellow]
+        } else if let initialPrice = initalPriceInUsd,
+                  initialPrice != 0,
+                  initialPrice != priceInUSD {
+            return priceInUSD > initialPrice ? [.black, .green] : [.black, .red]
+        } else {
+            return [.black, .yellow]
         }
+    }
 }
 
 struct LocalCoinView_Previews: PreviewProvider {

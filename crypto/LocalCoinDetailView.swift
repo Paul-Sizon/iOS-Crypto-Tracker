@@ -13,6 +13,9 @@ struct LocalCoinDetailView: View {
     let amount: Double
     let priceInUSD: Double
     let initialPriceInUsd: Double?
+    var coinWebsite: URL? {
+            CoinWebsite(rawValue: name.lowercased())?.url
+        }
     
     var body: some View {
         VStack {
@@ -46,8 +49,29 @@ struct LocalCoinDetailView: View {
             }
         }
         .padding()
+        
+        if let url = coinWebsite {
+                       NavigationLink(destination: CoinWebsiteView(url: url)) {
+                           Text("Learn more about \(name)")
+                               .font(.body)
+                                .foregroundColor(.black)
+                                .padding()
+                                .background(Color.gray.opacity(0.2))
+                                .cornerRadius(10.0)
+                       }
+                       .padding(.top, 20)
+        }
     }
 }
 
-
+struct LocalCoinDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        Text("Learn more about BTC")
+            .font(.body)
+             .foregroundColor(.black)
+             .padding()
+             .background(Color.gray.opacity(0.2))
+             .cornerRadius(10.0)
+    }
+}
 
