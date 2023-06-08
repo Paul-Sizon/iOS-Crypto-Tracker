@@ -6,27 +6,31 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct ContentView: View {
+    @StateObject var viewModel: CryptoViewModel
+    
     var body: some View {
         TabView {
-            ListingsView()
+            ListingsView(viewModel: viewModel)
                 .tabItem {
                     Image(systemName: "list.dash")
                     Text("Listings")
                 }
                 
-            WalletView()
+            WalletView(viewModel: viewModel)
                 .tabItem {
                     Image(systemName: "creditcard")
                     Text("My Wallet")
                 }
         }
     }
+
 }
 
 struct ListingsView: View {
-    @StateObject var viewModel = CryptoViewModel()
+    @ObservedObject var viewModel: CryptoViewModel
 
     var body: some View {
         ScrollView {
@@ -40,7 +44,10 @@ struct ListingsView: View {
     }
 }
 
+
 struct WalletView: View {
+    @ObservedObject var viewModel: CryptoViewModel
+
     var body: some View {
         NavigationView {
             VStack {
@@ -60,24 +67,57 @@ struct WalletView: View {
 }
 
 struct AddCoinView: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.managedObjectContext) var viewContext
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    @State var selectedCoin: String = "BTC"
+    @State var amount: String = ""
+    @State private var showingAlert = false
+
+
+    let coins = ["BTC", "BNB", "Polygon", "ADA", "DOGE", "ETH", "USD"]
 
     var body: some View {
-        VStack {
-            Text("Add Coin View")
-            Button("Back") {
-                presentationMode.wrappedValue.dismiss()
+        NavigationView {
+            Form {
+                Picker("Coin", selection: $selectedCoin) {
+                    ForEach(coins, id: \.self) { coin in
+                        Text(coin)
+                    }
+                }
+                TextField("Amount", text: $amount)
+                    .keyboardType(.decimalPad)
+                Button(action: {
+                    addCoin()
+                    showingAlert = true
+                    presentationMode.wrappedValue.dismiss()
+                }) {
+                    Text("Add Coin")
+                }
             }
-            .padding()
-            .background(Color.red)
-            .foregroundColor(.white)
-            .cornerRadius(8)
-            Spacer()
+            .alert(isPresented: $showingAlert) {
+                Alert(title: Text("Success"),
+                      message: Text("\(selectedCoin) of \(amount) amount added"),
+                      dismissButton: .default(Text("OK")))
+            }
+            .navigationTitle("Add a Coin")
         }
-        .padding()
-        .navigationBarTitle("Add Coin", displayMode: .inline)
+    }
+
+    private func addCoin() {
+        let amountAsDouble = Double(amount) ?? 0.0
+        let newCoin = LocalCoin(context: viewContext)
+        newCoin.name = selectedCoin
+        newCoin.amount = amountAsDouble
+        do {
+            try viewContext.save()
+        } catch {
+            print("Unable to save coin: \(error)")
+        }
     }
 }
+
+
 
 
 

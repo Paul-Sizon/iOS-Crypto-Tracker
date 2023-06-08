@@ -20,7 +20,6 @@
 		B90F23DC2A30F47400FFB99D /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90F23DB2A30F47400FFB99D /* CardView.swift */; };
 		B90F23DF2A311B2800FFB99D /* CryptoDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B90F23DD2A311B2800FFB99D /* CryptoDataModel.xcdatamodeld */; };
 		B90F23E22A311BF900FFB99D /* PersistentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90F23E12A311BF900FFB99D /* PersistentController.swift */; };
-		B90F23E42A311D4E00FFB99D /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90F23E32A311D4E00FFB99D /* Coin.swift */; };
 		B9BCFD9C2A312200005FB791 /* LocalCoin+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BCFD9A2A312200005FB791 /* LocalCoin+CoreDataClass.swift */; };
 		B9BCFD9D2A312200005FB791 /* LocalCoin+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BCFD9B2A312200005FB791 /* LocalCoin+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
@@ -59,7 +58,6 @@
 		B90F23DB2A30F47400FFB99D /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		B90F23DE2A311B2800FFB99D /* CryptoDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CryptoDataModel.xcdatamodel; sourceTree = "<group>"; };
 		B90F23E12A311BF900FFB99D /* PersistentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentController.swift; sourceTree = "<group>"; };
-		B90F23E32A311D4E00FFB99D /* Coin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
 		B9BCFD9A2A312200005FB791 /* LocalCoin+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "LocalCoin+CoreDataClass.swift"; path = "crypto/Model/LocalCoin+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B9BCFD9B2A312200005FB791 /* LocalCoin+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "LocalCoin+CoreDataProperties.swift"; path = "crypto/Model/LocalCoin+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -157,7 +155,6 @@
 			isa = PBXGroup;
 			children = (
 				B90F23D32A30DAFF00FFB99D /* Cryptocurrency.swift */,
-				B90F23E32A311D4E00FFB99D /* Coin.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -308,7 +305,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B90F23E42A311D4E00FFB99D /* Coin.swift in Sources */,
 				B90F23AC2A30C50A00FFB99D /* ContentView.swift in Sources */,
 				B9BCFD9D2A312200005FB791 /* LocalCoin+CoreDataProperties.swift in Sources */,
 				B90F23D42A30DAFF00FFB99D /* Cryptocurrency.swift in Sources */,
