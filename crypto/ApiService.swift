@@ -13,7 +13,7 @@ class ApiService {
             print("Invalid URL")
             return
         }
-
+        
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let data = data {
                 if let decodedResponse = try? JSONDecoder().decode(CryptoResponse.self, from: data) {

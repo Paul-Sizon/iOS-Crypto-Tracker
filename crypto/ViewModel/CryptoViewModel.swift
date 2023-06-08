@@ -9,7 +9,7 @@ import Foundation
 
 class CryptoViewModel: ObservableObject {
     @Published var cryptos = [String: Coin]()
-
+    
     let coinNameMapping: [String: String] = [
         "bitcoin": "BTC",
         "binancecoin": "BNB",
@@ -19,9 +19,9 @@ class CryptoViewModel: ObservableObject {
         "ethereum": "ETH",
         "tether": "USDT"
     ]
-
+    
     func loadData() {
-        self.cryptos = [:] 
+        self.cryptos = [:]
         ApiService().getCryptoData { (cryptos) in
             var mappedCryptos = [String: Coin]()
             for (key, value) in cryptos {

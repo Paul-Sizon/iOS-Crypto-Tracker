@@ -18,7 +18,7 @@ struct LocalCoinView: View {
         }
     }
     var initalPriceInUsd: Double?
-
+    
     var body: some View {
         NavigationLink(destination: LocalCoinDetailView(name: name, amount: amount, priceInUSD: priceInUSD, initialPriceInUsd: initalPriceInUsd)) {
             HStack {

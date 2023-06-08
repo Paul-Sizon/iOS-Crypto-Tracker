@@ -11,7 +11,7 @@ import WebKit
 
 struct CoinWebsiteView: View {
     let url: URL
-
+    
     var body: some View {
         WebView(url: url)
     }

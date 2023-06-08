@@ -15,7 +15,7 @@ enum CoinWebsite: String {
     case ada = "ada"
     case polygon = "polygon"
     case doge = "doge"
-
+    
     var url: URL? {
         switch self {
         case .btc:

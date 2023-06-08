@@ -29,7 +29,7 @@ struct CardView: View {
             LinearGradient(gradient: Gradient(colors: [.black, .orange]), startPoint: .top, endPoint: .bottom)
         )
         .cornerRadius(15) // Rounded rectangle as background
-//        .shadow(color: .gray, radius: 10, x: 0, y: 10) // Adds shadow around the card
+        //        .shadow(color: .gray, radius: 10, x: 0, y: 10) // Adds shadow around the card
         .padding(.horizontal) // Horizontal padding around the card
         .padding(.vertical, 5)
     }

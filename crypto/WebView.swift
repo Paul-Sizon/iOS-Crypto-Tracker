@@ -17,7 +17,7 @@ struct WebView: UIViewRepresentable {
         webView.scrollView.isScrollEnabled = true
         return webView
     }
-
+    
     func updateUIView(_ uiView: WKWebView, context: UIViewRepresentableContext<WebView>) {
         let request = URLRequest(url: url)
         uiView.load(request)
