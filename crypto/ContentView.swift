@@ -50,10 +50,20 @@ struct WalletView: View {
         entity: LocalCoin.entity(),
         sortDescriptors: [NSSortDescriptor(keyPath: \LocalCoin.name, ascending: true)]
     )
-    private var coins: FetchedResults<LocalCoin>
-
+    private var fetchedCoins: FetchedResults<LocalCoin>
     
     @ObservedObject var viewModel: CryptoViewModel
+    
+    private var coins: [LocalCoin] {
+        fetchedCoins.sorted {
+            guard let coinName1 = $0.name, let coinName2 = $1.name,
+                  let coinPrice1 = viewModel.cryptos[coinName1]?.usd,
+                  let coinPrice2 = viewModel.cryptos[coinName2]?.usd
+            else { return false }
+            
+            return $0.amount * coinPrice1 > $1.amount * coinPrice2
+        }
+    }
 
     var body: some View {
         NavigationView {
@@ -78,8 +88,9 @@ struct WalletView: View {
                 .navigationBarTitle("My Wallet", displayMode: .inline)
             }
         }
-        }
+    }
 }
+
 
 struct AddCoinView: View {
     @Environment(\.managedObjectContext) var viewContext
