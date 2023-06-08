@@ -20,29 +20,31 @@ struct LocalCoinView: View {
     var initalPriceInUsd: Double?
 
     var body: some View {
-        HStack {
-//            TODO: img
-            VStack {
-                Text(name)
-                    .font(.headline).foregroundColor(.white)
+        NavigationLink(destination: LocalCoinDetailView(name: name, amount: amount, priceInUSD: priceInUSD, initialPriceInUsd: initalPriceInUsd)) {
+            HStack {
+                //            TODO: img
+                VStack {
+                    Text(name)
+                        .font(.headline).foregroundColor(.white)
+                }
+                Spacer()
+                VStack {
+                    Text(String(format: "%.4f", amount))
+                        .font(.subheadline).bold().foregroundColor(.white)
+                    Text("$ \(String(format: "%.2f", total))")
+                        .font(.subheadline).foregroundColor(.white)
+                }
             }
-            Spacer()
-            VStack {
-                Text(String(format: "%.4f", amount))
-                    .font(.subheadline).bold().foregroundColor(.white)
-                Text("$ \(String(format: "%.2f", total))")
-                    .font(.subheadline).foregroundColor(.white)
-            }
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(LinearGradient(
+                gradient: Gradient(colors: gradientColors()),
+                startPoint: .top,
+                endPoint: .bottom
+            ))
+            .cornerRadius(10)
+            .padding([.leading, .trailing])
         }
-        .padding()
-        .frame(maxWidth: .infinity)
-        .background(LinearGradient(
-                    gradient: Gradient(colors: gradientColors()),
-                    startPoint: .top,
-                    endPoint: .bottom
-                ))
-        .cornerRadius(10)
-        .padding([.leading, .trailing])
     }
     
     private func gradientColors() -> [Color] {
