@@ -20,9 +20,11 @@ class CryptoViewModel: ObservableObject {
         "tether": "USDT"
     ]
     
+    var apiService: ApiServiceProtocol = ApiService()
+    
     func loadData() {
         self.cryptos = [:]
-        ApiService().getCryptoData { (cryptos) in
+        apiService.getCryptoData { (cryptos) in
             var mappedCryptos = [String: Coin]()
             for (key, value) in cryptos {
                 let newKey = self.coinNameMapping[key, default: String(key.capitalized)]
