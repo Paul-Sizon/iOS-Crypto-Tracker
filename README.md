@@ -1,6 +1,6 @@
 # iOS Crypto Tracker
 
-This is a small SwiftUI app that tracks cryptocurrency prices. It uses the coingecko to fetch real-time data and display it in a clean, intuitive UI.
+This is a small pet project SwiftUI app that tracks cryptocurrency prices. It uses the coingecko to fetch real-time data and display it in a clean, intuitive UI.
 
 ## Features
 
